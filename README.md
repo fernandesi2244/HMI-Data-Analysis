@@ -1,5 +1,5 @@
 # HMI-Data-Analysis
-Analysis of Magnetogram-Related Data from the Solar Dynamics Observatory's HMI Instrument
+Analysis of Magnetogram-Related Data of the Sun Obtained from the Solar Dynamics Observatory's HMI Instrument
 
 # Files
 
