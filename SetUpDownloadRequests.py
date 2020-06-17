@@ -137,8 +137,8 @@ class DownloadStager(object):
                 res = self.client.get_request(requests, path = 'HMI Downloaded Files')
             except Exception:
                 pass
-            if requests.status == 1:
-                print('Status = 1; good to go!')
+            if requests.status == 1 or requests.status == 0:
+                print(f'Status = {requests.status}; good to go!')
                 time.sleep(1)
                 self.log_success(start, end, requests.id)
             elif requests.status == 6:
@@ -154,9 +154,9 @@ class DownloadStager(object):
                         res = self.client.get_request(requests, path = 'HMI Downloaded Files')
                     except Exception:
                         pass
-                    if requests.status == 1:
+                    if requests.status == 1 or requests.status == 0:
                         break
-                if requests.status == 1:
+                if requests.status == 1 or requests.status == 0:
                     print('Double-tapping method worked!')
                     time.sleep(1)
                     self.log_success(start, end, requests.id)
@@ -198,9 +198,9 @@ class DownloadStager(object):
                     res = self.client.get_request(requests, path = 'HMI Downloaded Files')
                 except Exception:
                     pass
-                if requests.status == 1:
+                if requests.status == 1 or requests.status == 0:
                     break
-            if requests.status == 1:
+            if requests.status == 1 or requests.status == 0:
                 print('Double-tapping method worked!')
                 time.sleep(1)
                 self.log_success(start, end, requests.id)
@@ -212,8 +212,8 @@ class DownloadStager(object):
                 print('Waiting 15 seconds to try again...')
                 time.sleep(15)
                 self.get_files(start, end)
-        elif requests.status == 1:
-            print('Status = 1; good to go!')
+        elif requests.status == 1 or requests.status == 0:
+            print(f'Status = {requests.status}; good to go!')
             time.sleep(1)
             self.log_success(start, end, requests.id)
         else:
