@@ -15,6 +15,9 @@ Uses the list of magnetogram objects constructed in ProcessFiles.py to display i
 ## SetUpDownloadRequests.py
 Automates the process of staging download requests from the JSOCClient so that large amounts of data can easily be downloaded later.
 
+###Example Output
+![Example Output](setUpDownloadRequestsInOperation.PNG)
+
 ## HMI Downloaded Files
 Where all of the pertinent HMI data from the query is downloaded.
 
