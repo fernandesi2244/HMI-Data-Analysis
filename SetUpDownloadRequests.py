@@ -142,6 +142,7 @@ class DownloadStager(object):
                 time.sleep(1)
                 self.log_success(start, end, requests.id)
             elif requests.status == 6:
+                # Double-tapping method simply re-runs the get_request() command after a short period of time; this usually works
                 print('Status = 6; trying double-tapping method')
                 code6Max = 5
                 currentTries = 0
@@ -185,6 +186,7 @@ class DownloadStager(object):
             time.sleep(30)
             self.get_files(start, end)
         elif requests.status == 6:
+            # Double-tapping method simply re-runs the get_request() command after a short period of time; this usually works
             print('Status = 6; trying double-tapping method')
             code6Max = 5
             currentTries = 0
@@ -231,7 +233,7 @@ class DownloadStager(object):
 
         start: the start day
         end: the end day
-        
+
         """
 
         self.no_tries = 0
