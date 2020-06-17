@@ -131,6 +131,16 @@ class DownloadStager(object):
         print('Request ID:', requests.id)
         print('Request Status:', requests.status)
 
+        '''
+        Status Code | Meaning
+        -----------------------------------------------------------------------------------------------------------------------------------------
+        0           | Ready to download; this is one of the optimal statuses, but this status is not expected to be seen during script execution.
+        1           | Staging, will be ready to download; this is the status we want when running the program.
+        2           | Need to “nudge” it to stage; tell it to download using client.get_request() (JSOC Client won’t actually download yet)
+        4           | Request failed/timed out; run staging process again
+        6           | Request failed/timed out; tell it to "download" again using client.get_request()
+        '''        
+
         if requests.status == 2:
             try:
                 print('Running get_request()...')
