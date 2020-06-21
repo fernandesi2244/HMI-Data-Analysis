@@ -3,12 +3,12 @@ from sunpy.net.jsoc import *
 import astropy.units as u
 import time
 import os
+import re
 
 class DownloadStager(object):
     """
     Represents a month of a specific year that you want to stage download requests for.
     Scroll all the way to the bottom for usage.
-
     """
 
     MAX_ATTEMPTS = 10   # Max attempts of program before quitting and logging time range. If your requests typically fail while using the terminal, you may want to increase this value.
@@ -21,7 +21,6 @@ class DownloadStager(object):
         year: year of month you want data for
         month: numerical value of month; ordinal-based, not zero-based (DO NOT FILL IN 0s FOR SINGLE-DIGIT MONTHS)
         days_in_month: the number of days in the month for that that specific year
-
         """
 
         self.year = year
@@ -40,7 +39,6 @@ class DownloadStager(object):
 
         start: the start day
         end: the end day
-
         """
 
         time.sleep(5)
@@ -56,7 +54,6 @@ class DownloadStager(object):
         start: the start day
         end: the end day
         id: the id of the request
-
         """
 
         time.sleep(5)
@@ -81,7 +78,6 @@ class DownloadStager(object):
 
         start: the day to start from
         end: the day to end on
-
         """
 
         start_time = f"{self.year}-{self.month:02d}-{start:02d}T00:00:00"
@@ -243,14 +239,35 @@ class DownloadStager(object):
 
         start: the start day
         end: the end day
-
         """
 
         self.no_tries = 0
         print(f'Running with custom timeframe: {self.month:02d}/{start:02d}/{self.year} to {self.month:02d}/{end:02d}/{self.year}')
         self.get_files(start, end)
         self.no_tries = 0
+    
+    @staticmethod
+    def obtain_JSOC_nums():
+        """
+        Extracts just the ID numbers from the 'request_numbers.txt' file and writes them to the 'JSOC_IDs.txt' file.
+        """
 
+        IDs = []
+        input_path = os.path.join('DownloadRequestData', 'request_numbers.txt')
+        with open(input_path, 'r') as read_file:
+            all_lines = read_file.readlines()
+            regex = 'JSOC_\\d+_\\d+'
+            for line in all_lines:
+                match = re.search(regex, line)
+                if match:
+                    IDs.append(match.group()+'\n')
+                else:
+                    print('Could not extract ID from:', line)
+        
+        output_path = os.path.join('DownloadRequestData', 'JSOC_IDs.txt')
+        with open(output_path, 'w') as write_file:
+            write_file.writelines(IDs)
+        print("Check the 'JSOC_IDs.txt' file for the IDs.")
 
 '''
 EXAMPLE USAGE:
@@ -277,6 +294,11 @@ IF THE PROGRAM GETS STUCK ON A MONTH AND YOU NEED TO MANUALLY RUN ON SPECIFIC RA
 
 january_2015 = DownloadStager(2015, 1, 31)
 january_2015.run_range(16, 23)
+
+
+TO TURN OUTPUT (request_numbers.txt) INTO JUST ID NUMBERS:
+
+DownloadStager.obtain_JSOC_nums()
 '''
 
 # START ENTERING YOUR COMMANDS HERE:
