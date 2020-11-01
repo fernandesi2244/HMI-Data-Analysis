@@ -1,5 +1,5 @@
 # HMI-Data-Analysis
-Analysis of Magnetogram-Related Data of the Sun Obtained from the Solar Dynamics Observatory's HMI Instrument. This should not be confused with any part of the MAG4 project, which is currently a private repository due to NASA restrictions.
+Analysis of Magnetogram-Related Data of the Sun Obtained from the Solar Dynamics Observatory's HMI Instrument. This should not be confused with any part of the MAG4 project, which is currently a private repository due to NASA restrictions. Also, please note that many components of the programs were left unfinished, as the code written in this repository was purely for practice handling data with MAG4.
 
 # Files
 
